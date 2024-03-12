@@ -1,35 +1,20 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import Title from './components/Title';
+import Greeting from './components/Greeting';
+import Input from './components/Input';
 
 import './styles.css';
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            displayName: '',
-            name: ''
-        };
-    }
+const App = props => {
+    const [displayName, setDisplayName] = useState();
 
-    handleChange = evt => {
-        this.setState({
-            name: evt.target.value
-        });
-    }
-    handleClick = evt => {
-        this.setState({
-            displayName: this.state.name
-        });
-    }
-    render () {
-        return(
-            <>
-                <h1>Welcome to the App</h1>
-                <p>Hi there, {this.state.displayName || "we have not been introduced"}</p>
-                <input value={this.state.name} onChange={this.handleChange} />
-                <button onClick={this.handleClick}>Update name</button>
-            </> 
-        );
-    }
+    return (
+        <>
+            <Title title="Welcome to the app" />
+            <Greeting name={displayName} />
+            <p>Enter your name below so we can get better acquainted</p>
+            <Input handleClick={name => setDisplayName(name)} />
+        </> 
+    );
 }
 
 export default App;
